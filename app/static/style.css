@@ -11,3 +11,5 @@ button { background:#2563eb; color:#fff; border:none; cursor:pointer; margin-top
 button:hover { filter: brightness(0.95); }
 .resultado { background:#0b1022; color:#9fe39f; padding:10px; border-radius:8px; overflow:auto; }
 ol { padding-left: 18px; }
+body { font-feature-settings: "ss01", "ss02"; }
+.card-title { margin-bottom: .75rem; }

@@ -80,3 +80,10 @@ def listar_ventas():
         "total": float(v.total),
     } for v in q.all()]
     return jsonify(data)
+@main.get("/api/ventas-por-hora")
+def api_ventas_por_hora():
+    return jsonify(AnalyticsEngine.get_ventas_por_hora())
+
+@main.get("/api/ventas-por-dia")
+def api_ventas_por_dia():
+    return jsonify(AnalyticsEngine.get_ventas_por_dia_semana())
