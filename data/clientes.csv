@@ -1,3 +1,2 @@
-id,nombre,email,telefono
-1,Ana Perez,ana@example.com,555-1111
-2,Carlos Ruiz,carlos@example.com,555-2222
+﻿id,nombre,correo
+1,Cliente Demo,demo@local

@@ -15,22 +15,22 @@ class AnalyticsEngine:
         inicio_mes = hoy.replace(day=1)
         mes_anterior = (inicio_mes - timedelta(days=1)).replace(day=1)
 
-        ventas_mes = db.session.query(func.sum(Venta.total))\
+        ventas_mes = db.session.query(func.sum(Venta.total)) \
             .filter(Venta.fecha >= inicio_mes).scalar() or 0.0
 
-        ventas_mes_anterior = db.session.query(func.sum(Venta.total))\
+        ventas_mes_anterior = db.session.query(func.sum(Venta.total)) \
             .filter(Venta.fecha >= mes_anterior, Venta.fecha < inicio_mes).scalar() or 0.0
 
         crecimiento = ((ventas_mes - ventas_mes_anterior) / ventas_mes_anterior * 100.0) \
             if ventas_mes_anterior > 0 else 0.0
 
-        ticket_promedio = db.session.query(func.avg(Venta.total))\
+        ticket_promedio = db.session.query(func.avg(Venta.total)) \
             .filter(Venta.fecha >= inicio_mes).scalar() or 0.0
 
-        productos_vendidos = db.session.query(func.sum(Venta.cantidad))\
+        productos_vendidos = db.session.query(func.sum(Venta.cantidad)) \
             .filter(Venta.fecha >= inicio_mes).scalar() or 0
 
-        clientes_unicos = db.session.query(func.count(func.distinct(Venta.cliente_id)))\
+        clientes_unicos = db.session.query(func.count(func.distinct(Venta.cliente_id))) \
             .filter(Venta.fecha >= inicio_mes, Venta.cliente_id.isnot(None)).scalar() or 0
 
         return {
@@ -58,7 +58,12 @@ class AnalyticsEngine:
             .all()
         )
         return [
-            {"producto": f[0], "categoria": f[1], "cantidad": int(f[2] or 0), "ingreso": float(round(f[3] or 0.0, 2))}
+            {
+                "producto": f[0],
+                "categoria": f[1],
+                "cantidad": int(f[2] or 0),
+                "ingreso": float(round(f[3] or 0.0, 2)),
+            }
             for f in filas
         ]
 
@@ -73,7 +78,7 @@ class AnalyticsEngine:
     # ---- VENTAS POR DÍA DE LA SEMANA ----
     @staticmethod
     def get_ventas_por_dia_semana():
-        nombres = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"]
+        nombres = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
         totales = {i: 0.0 for i in range(7)}
         for v in Venta.query.all():
             totales[v.fecha.weekday()] += float(v.total or 0.0)
@@ -100,8 +105,8 @@ class AnalyticsEngine:
         # Stats para percentiles
         freqs = [d[3] or 0 for d in datos]
         montos = [float(d[4] or 0.0) for d in datos]
-        p50_freq = sorted(freqs)[len(freqs)//2]
-        p75_monto = sorted(montos)[int(len(montos)*0.75)]
+        p50_freq = sorted(freqs)[len(freqs) // 2]
+        p75_monto = sorted(montos)[int(len(montos) * 0.75)]
 
         res = []
         for d in datos:
@@ -165,7 +170,9 @@ class AnalyticsEngine:
             .order_by(Venta.fecha.asc())
             .all()
         )
-        if len(ventas) < 10:
+        # UMBRAL BAJO PARA DEMO
+        if len(ventas) < 1:
+            print("DEBUG analytics: sin ventas para producto", producto_id)  # <— LOG
             return {"error": "Datos insuficientes"}
 
         # agregamos por día

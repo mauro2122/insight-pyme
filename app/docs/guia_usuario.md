@@ -1,18 +1,17 @@
-# Guía de Usuario – Insight-PYME
+# Guía de usuario – Insight PYME
 
-## 1. Preparación
-- Activar entorno: `.venv\Scripts\Activate.ps1`
-- Ejecutar ETL: `python -m app.etl --clientes data/clientes.csv --productos data/productos.csv --ventas data/ventas.csv --truncate true`
+## 1. ¿Qué es?
+Aplicación web simple para PYMEs que carga datos (clientes, productos y ventas), calcula KPIs y hace una estimación básica de demanda por producto.
 
-## 2. Abrir la app
-- `python run.py` → abrir la URL que aparece (ej. http://127.0.0.1:5000/)
+## 2. Requisitos
+- Windows 10/11
+- Python 3.11+ (ya estás usando 3.11)
+- Navegador (Chrome / Edge)
 
-## 3. Funciones
-- **KPIs**: tarjetas con total de clientes, productos y ventas.
-- **Top productos**: tabla dinámica con monto vendido.
-- **Predicción de demanda**: seleccionar un producto y un rango de días, luego “Predecir”.
-- **Ventas**: listado de ventas recientes con filtros por fecha.
-
-## 4. Errores comunes
-- “No hay datos”: Ejecuta el ETL.
-- “500 interno”: Ver consola; casi siempre es ruta o CSV con formato distinto.
+## 3. Instalación rápida
+```bash
+git clone https://github.com/mauro2122/insight-pyme.git
+cd insight-pyme
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
