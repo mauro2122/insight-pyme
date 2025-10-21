@@ -4,57 +4,71 @@
 {% block content %}
 <div class="row g-3">
 
-  <!-- KPIs -->
+  <!-- Filtros de fecha -->
   <div class="col-12">
-    <div class="row g-3">
-      <div class="col-md-3">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <div class="text-secondary small">Ventas del mes</div>
-            <div class="fs-4 fw-bold" id="kpi-ventas-mes">—</div>
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="row g-2 align-items-end">
+          <div class="col-auto">
+            <label class="form-label">Desde</label>
+            <input type="date" class="form-control" id="f-desde">
           </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <div class="text-secondary small">Crecimiento</div>
-            <div class="fs-4 fw-bold" id="kpi-crecimiento">—</div>
+          <div class="col-auto">
+            <label class="form-label">Hasta</label>
+            <input type="date" class="form-control" id="f-hasta">
           </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <div class="text-secondary small">Ticket promedio</div>
-            <div class="fs-4 fw-bold" id="kpi-ticket">—</div>
+          <div class="col-auto d-grid">
+            <button class="btn btn-outline-primary" id="btn-aplicar">Aplicar</button>
           </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <div class="text-secondary small">Clientes únicos</div>
-            <div class="fs-4 fw-bold" id="kpi-clientes">—</div>
+          <div class="col-auto d-grid">
+            <button class="btn btn-outline-secondary" id="btn-limpiar">Limpiar</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Top productos + Predicción -->
+  <!-- KPIs -->
+  <div class="col-12">
+    <div class="row g-3">
+      <div class="col-md-3">
+        <div class="card shadow-sm"><div class="card-body">
+          <div class="text-secondary small">Ventas del mes</div>
+          <div class="fs-4 fw-bold" id="kpi-ventas-mes">—</div>
+        </div></div>
+      </div>
+      <div class="col-md-3">
+        <div class="card shadow-sm"><div class="card-body">
+          <div class="text-secondary small">Crecimiento</div>
+          <div class="fs-4 fw-bold" id="kpi-crecimiento">—</div>
+        </div></div>
+      </div>
+      <div class="col-md-3">
+        <div class="card shadow-sm"><div class="card-body">
+          <div class="text-secondary small">Ticket promedio</div>
+          <div class="fs-4 fw-bold" id="kpi-ticket">—</div>
+        </div></div>
+      </div>
+      <div class="col-md-3">
+        <div class="card shadow-sm"><div class="card-body">
+          <div class="text-secondary small">Clientes únicos</div>
+          <div class="fs-4 fw-bold" id="kpi-clientes">—</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top productos -->
   <div class="col-lg-7">
     <div class="card shadow-sm h-100">
       <div class="card-body">
         <h5 class="card-title">Top productos</h5>
         <div class="table-responsive">
           <table class="table align-middle">
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th class="text-end">Ingresos</th>
-              </tr>
-            </thead>
+            <thead><tr>
+              <th>Producto</th>
+              <th class="text-end">Ingresos</th>
+            </tr></thead>
             <tbody id="top-body">
               <tr><td colspan="2" class="text-center text-secondary">Cargando…</td></tr>
             </tbody>
@@ -64,11 +78,11 @@
     </div>
   </div>
 
+  <!-- Predicción -->
   <div class="col-lg-5">
     <div class="card shadow-sm h-100">
       <div class="card-body">
         <h5 class="card-title">Predicción de demanda</h5>
-
         <form id="form-predict" class="row gy-2 gx-2 align-items-center">
           <div class="col-12">
             <label class="form-label">Producto</label>
@@ -90,9 +104,8 @@
             </button>
           </div>
         </form>
-
         <hr>
-        <div id="resultado" class="lead">—</div>
+        <div id="pred-resultado" class="mt-2 text-secondary">—</div>
       </div>
     </div>
   </div>
