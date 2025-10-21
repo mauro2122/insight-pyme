@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Insight PYME - Tablero{% endblock %}
+
+{% block content %}
+<section class="grid">
+  <div class="card">
+    <h2>KPIs</h2>
+    <ul id="kpis">
+      <li>Clientes: <strong id="kpi-clientes">—</strong></li>
+      <li>Productos: <strong id="kpi-productos">—</strong></li>
+      <li>Ventas totales: <strong id="kpi-ventas">—</strong></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Top productos</h2>
+    <ol id="top-productos"></ol>
+  </div>
+
+  <div class="card">
+    <h2>Predicción de demanda</h2>
+    <form id="form-demanda">
+      <label>Producto</label>
+      <select id="producto-id" required>
+        {% for p in productos %}
+          <option value="{{ p.id }}">{{ p.nombre }}</option>
+        {% endfor %}
+      </select>
+
+      <label>Días a futuro</label>
+      <input id="dias" type="number" min="1" value="30" required />
+
+      <button type="submit">Predecir</button>
+    </form>
+
+    <pre id="resultado" class="resultado">—</pre>
+  </div>
+</section>
+{% endblock %}
